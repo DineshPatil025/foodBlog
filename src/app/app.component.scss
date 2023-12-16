@@ -1,0 +1,51 @@
+#logo {
+    height: 50px;
+    width: 100px;
+    border-radius: 50%;
+}
+
+a {
+    font-size: 20px;
+    text-transform: uppercase;
+    margin-right: 10px;
+}
+
+#navbarSupportedContent {
+    display: flex;
+    justify-content: space-around;
+}
+
+.mat-icon-button i,
+.mat-icon-button .mat-icon {
+    line-height: 20px;
+}
+
+.head-gf {
+    font-size: 50px;
+    font-weight: bold;
+    letter-spacing: 15px;
+    transform: scaleY(1.8);
+    margin-bottom: 30px;
+}
+.theme{
+    letter-spacing: 5px;
+}
+.logo{
+    width: 380px;
+    height: 106px;
+    // padding: 50px 0;
+}
+section{
+    background-color: #fffef8;
+    // background-color: white;
+}
+
+.border{
+        border-bottom: 2px solid #dcd9ca !important;
+        // width: 80%;
+        // position: relative;
+        // left: 10%;
+        // background-color: #fffef8;
+}
+
+
