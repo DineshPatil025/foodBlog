@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { PostFormComponent } from './shared/components/post-form/post-form.component';
 import { Dialog, DialogRef } from '@angular/cdk/dialog';
+import { SearchFormComponent } from './shared/components/search-form/search-form.component';
 
 @Component({
   selector: 'app-root',
@@ -18,9 +19,20 @@ export class AppComponent implements OnInit {
   openPostForm() {
     let matDialCongif = new MatDialogConfig;
     matDialCongif.width = "500px";
-    matDialCongif.hasBackdrop= false;
+    matDialCongif.hasBackdrop = false;
 
     this._dialog.open(PostFormComponent, matDialCongif)
   }
+
+
+  onSearchClick() {
+    console.log("search clicked");
+    let matDialCongif = new MatDialogConfig;
+    matDialCongif.width = "500px"
+    // matDialCongif.position 
+    this._dialog.open(SearchFormComponent, matDialCongif)
+    
+  }
+
 
 }

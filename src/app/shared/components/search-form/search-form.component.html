@@ -1,0 +1,18 @@
+<h3 mat-dialog-title class="text-center"> Search Food Recipe</h3>
+<mat-dialog-content>
+    <mat-form-field class="d-block" appearance="outline">
+        <mat-label>Search Food Recipe</mat-label>
+        <input type="text" matInput >
+    </mat-form-field>
+   
+</mat-dialog-content>
+<mat-dialog-actions class="d-flex justify-content-between">
+    <button mat-raised-button color="primary">
+        Search
+    </button>
+    <button mat-raised-button color="primary"
+    (click)="onCloseSearch()"
+    >
+        Cancel
+    </button>
+</mat-dialog-actions>

@@ -1,76 +1,69 @@
-<form>
-    <h3 matDialogTitle class="text-center"> Add New Recipe </h3>
+<form [formGroup]="recipeForm" (ngSubmit)="onRecipeSubmit()">
+  <h3 matDialogTitle class="text-center"> Add New Recipe </h3>
 
-    <mat-dialog-content class="inputs">
+  <mat-dialog-content class="inputs">
 
-        <mat-form-field appearance="outline">
-            <mat-label>recipe Title</mat-label>
-            <input matInput placeholder="Title">
-        </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>recipe Title</mat-label>
+      <input matInput formControlName="recTitle" placeholder="Title">
+    </mat-form-field>
 
-        <mat-form-field appearance="outline">
-            <mat-label>Description</mat-label>
-            <textarea matInput placeholder="Description"></textarea>
-        </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Description</mat-label>
+      <textarea matInput formControlName="recDescription" placeholder="Description"></textarea>
+    </mat-form-field>
 
-        <mat-form-field appearance = "outline">
-          <mat-label>Dish Icon Url </mat-label>
-          <input matInput placeholder="Enter Image URL" type="text">
-        </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Dish Icon Url </mat-label>
+      <input matInput formControlName="recIconUrl" placeholder="Enter Image URL" type="text">
+    </mat-form-field>
 
-        <mat-form-field appearance = "outline">
-          <mat-label>Dish Main Url </mat-label>
-          <input matInput placeholder="Enter Main URL" type="text">
-        </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Dish Main Url </mat-label>
+      <input matInput formControlName="recMainUrl" placeholder="Enter Main URL" type="text">
+    </mat-form-field>
 
-        <mat-form-field class="example-chip-list" appearance="outline">
-            <mat-label>Ingredients</mat-label>
-            <mat-chip-list #chipList aria-label="Fruit selection">
-              <mat-chip
-                *ngFor="let ingrediant of ingrediantArr"
-                (removed)="remove(ingrediant)">
-                {{ingrediant}}
-                <button matChipRemove>
-                  <mat-icon>cancel</mat-icon>
-                </button>
-              </mat-chip>
-              <input
-              matInput
-                placeholder="Add Ingredients"
-                #ingrediantInp
-                [formControl]="IngrediantCtrl"
-                [matAutocomplete]="auto"
-                [matChipInputFor]="chipList"
-                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                (matChipInputTokenEnd)="add($event)">
-                
-            </mat-chip-list>
-            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-              <mat-option *ngFor="let ingredient of filteredIngredients | async" [value]="'ingredient'">
-                {{ingredient}}
-              </mat-option>
-            </mat-autocomplete>
-          </mat-form-field>
-          
+    <mat-form-field class="example-chip-list" appearance="outline">
+      <mat-label>Ingredients</mat-label>
+      <mat-chip-list #chipList aria-label="Fruit selection" formControlName ="recIngrediants">
+        <mat-chip *ngFor="let ingrediant of ingrediantArr" (removed)="remove(ingrediant)">
+          {{ingrediant}}
+          <button matChipRemove>
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </mat-chip>
+        <input matInput placeholder="Add Ingredients" #ingrediantInp [formControl]="IngrediantCtrl"
+          [matAutocomplete]="auto" [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+          (matChipInputTokenEnd)="add($event)">
 
-        <mat-form-field appearance="outline">
-            <mat-label>Meal</mat-label>
-            <mat-select>
-              <mat-option >Breakfast </mat-option>
-              <mat-option >Lunch </mat-option>
-              <mat-option >Dinner </mat-option>
-            </mat-select>
-        </mat-form-field>
-
-    </mat-dialog-content>
+      </mat-chip-list>
+      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+        <mat-option *ngFor="let ingredient of filteredIngredients | async" [value]="'ingredient'">
+          {{ingredient}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
 
 
-    <mat-dialog-actions class="d-flex justify-content-between">
-        <button mat-raised-button color="primary" *ngIf="!inEditMode" matTooltip="Click to Add New Post">Add
-            Recipe</button>
-        <button mat-raised-button color="primary" type="button" *ngIf="inEditMode" (click)="onPostUpdate()"
-            matTooltip="Click to Update Post">Update Recipe</button>
-        <button mat-raised-button color="primary" type="button" (click)="onCloseDialog()"
-            matTooltip="Click to Close ">Cancel </button>
-    </mat-dialog-actions>
+    <mat-form-field appearance="outline">
+      <mat-label>Meal</mat-label>
+      <mat-select formControlName="recMeal">
+        <mat-option value="breakfast">Breakfast </mat-option>
+        <mat-option value="lunch">Lunch </mat-option>
+        <mat-option value="dinner">Dinner </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+  </mat-dialog-content>
+
+
+  <mat-dialog-actions class="d-flex justify-content-between">
+    <button mat-raised-button color="primary" *ngIf="!inEditMode" matTooltip="Click to Add New Post">Add
+      Recipe</button>
+    <button mat-raised-button color="primary" type="button" *ngIf="inEditMode" (click)="onPostUpdate()"
+      matTooltip="Click to Update Post">Update Recipe</button>
+    <button mat-raised-button color="primary" type="button" (click)="onCloseDialog()"
+      matTooltip="Click to Close ">Cancel </button>
+  </mat-dialog-actions>
+
 </form>

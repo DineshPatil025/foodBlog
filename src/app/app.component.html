@@ -56,12 +56,16 @@
             </div>
 
             <form class="form-inline my-2 my-lg-0">
-                <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0 mr-5" type="submit">Search</button> -->
-                <a href=""><i class="fa-solid fa-magnifying-glass fa-2 mr-3"></i></a>
-                <button mat-raised-button color ="primary" type="button" id="addFoodRecipe"
-                (click)="openPostForm()"
-                >Add
+
+                <button mat-icon-button color="primary" class="mr-2"
+                (click)="onSearchClick()"
+                >
+                    <mat-icon>
+                        <i class="fa-solid fa-magnifying-glass fa-2 mr-3"></i>
+                        
+                    </mat-icon>
+                </button>
+                <button mat-raised-button color="primary" type="button" id="addFoodRecipe" (click)="openPostForm()">Add
                     Recipe</button>
             </form>
 
