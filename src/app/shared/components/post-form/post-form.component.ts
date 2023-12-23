@@ -53,13 +53,9 @@ export class PostFormComponent implements OnInit {
   }
 
   onRecipeSubmit() {
-    console.log("form submitted");
     let newObj = this.recipeForm.value
-    console.log({...newObj,recIngrediants:this.ingrediantArr});
+    console.log({ ...newObj, recIngrediants: this.ingrediantArr });
     console.log(this.ingrediantArr);
-    
-
-
   }
 
   add(event: MatChipInputEvent): void {
@@ -70,7 +66,7 @@ export class PostFormComponent implements OnInit {
       this.ingrediantArr.push(value);
     }
     console.log(this.ingrediantArr);
-    
+
 
     // Clear the input value
     event.chipInput!.clear();
