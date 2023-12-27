@@ -1,0 +1,22 @@
+<div class="row">
+    <div *ngIf="foodblogArray.length>0;else:noFoodBlogs">
+        <div class="col-md-4" *ngFor="let fBlog of foodblogArray">
+            <app-fb-card [fBlog]="fBlog"></app-fb-card>
+        </div>
+    </div>
+    <ng-template #noFoodBlogs>
+        <div class="col-md-8 offset-2">
+            <h3 class="alert alert-info text-center text-danger text-capitalize">No Food Recipe Added yet, click On Add
+                Recipe button !!!!!!!!!</h3>
+        </div>
+    </ng-template>
+
+
+
+</div>
+
+
+
+
+
+<!-- <app-fb-card [fBlog]="foodblogArray"></app-fb-card> -->

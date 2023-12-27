@@ -1,10 +1,11 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Inject, OnInit, ViewChild, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Observable, map, startWith } from 'rxjs';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { FoodBlogService } from '../../services/food-blog.service';
 
 @Component({
   selector: 'app-post-form',
@@ -15,6 +16,8 @@ export class PostFormComponent implements OnInit {
 
   recipeForm !: FormGroup;
   inEditMode: boolean = false;
+  bannerImg!: string;
+  thumbnailImg!: string;
 
 
 
@@ -25,6 +28,10 @@ export class PostFormComponent implements OnInit {
   ingrediantArr: string[] = [];
   allingrediant: string[] = [];
   @ViewChild('ingrediantInp') ingrediantInp!: ElementRef<HTMLInputElement>;
+
+  private _FBService = inject(FoodBlogService)
+
+
   constructor(
     private _matDialRef: MatDialogRef<PostFormComponent>,
     private _fb: FormBuilder
@@ -45,8 +52,8 @@ export class PostFormComponent implements OnInit {
     this.recipeForm = new FormGroup({
       recTitle: new FormControl(null, Validators.required),
       recDescription: new FormControl(null, Validators.required),
-      recIconUrl: new FormControl(null, Validators.required),
-      recMainUrl: new FormControl(null, Validators.required),
+      bannerImg: new FormControl(null, Validators.required),
+      thumbnailImg: new FormControl(null, Validators.required),
       recMeal: new FormControl(null, Validators.required),
       recIngrediants: new FormControl(null, Validators.required),
     })
@@ -54,18 +61,22 @@ export class PostFormComponent implements OnInit {
 
   onRecipeSubmit() {
     let newObj = this.recipeForm.value
-    console.log({ ...newObj, recIngrediants: this.ingrediantArr });
-    console.log(this.ingrediantArr);
+    // console.log({ ...newObj, recIngrediants: this.ingrediantArr });
+    console.log(newObj);
+    
+    this._FBService.sendFoodBlog(newObj)
+    this.recipeForm.reset();
+    this._matDialRef.close();
+
   }
 
   add(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
 
-    // Add our fruit
     if (value) {
       this.ingrediantArr.push(value);
+      this.recipeForm.controls['recIngrediants'].setValue(this.ingrediantArr)
     }
-    console.log(this.ingrediantArr);
 
 
     // Clear the input value
@@ -79,6 +90,8 @@ export class PostFormComponent implements OnInit {
 
     if (index >= 0) {
       this.ingrediantArr.splice(index, 1);
+      this.recipeForm.controls['recIngrediants'].setValue(this.ingrediantArr)
+
     }
   }
 
@@ -102,6 +115,63 @@ export class PostFormComponent implements OnInit {
 
   onPostUpdate() {
 
+  }
+
+  fileUploader = (inpFileCtrl: any) => {
+    return new Promise((resolve, reject) => {
+      let selectedFile = inpFileCtrl.files[0];
+      if (selectedFile) {
+
+        let reader = new FileReader();
+        reader.onload = (e) => {
+          let imgObj = {
+            fileName: selectedFile.name,
+            fileType: selectedFile.type,
+            fileSize: selectedFile.size,
+            fileBase64: e.target?.result,
+            fileUploadTime: Date.now(),
+
+          }
+          resolve(imgObj)
+        }
+        reader.readAsDataURL(selectedFile)
+
+      } else {
+        reject("something went wrong")
+      }
+
+    })
+  }
+
+
+  onBannerSelected(event: any) {
+
+    const inpTarget = event.target;
+
+    this.fileUploader(inpTarget)
+      .then(res => {
+        console.log(res)
+        let bannImgObj = res
+        this.recipeForm.controls['bannerImg'].setValue(bannImgObj)
+      });
+
+    
+  }
+
+
+  onThumnailSelected(event: any) {
+
+
+    const inpTarget = event.target;
+
+    this.fileUploader(inpTarget)
+      .then(res => {
+        console.log(res)
+        let thumImgObj = res
+        this.recipeForm.controls['thumbnailImg'].setValue(thumImgObj)
+      });
+
+    
   }
 
 }

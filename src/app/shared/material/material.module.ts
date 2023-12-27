@@ -9,6 +9,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatSelectModule} from '@angular/material/select';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import {MatCardModule} from '@angular/material/card';
 
 
 
@@ -22,7 +23,8 @@ const matArray = [
   MatInputModule,
   MatChipsModule,
   MatSelectModule,
-  MatAutocompleteModule
+  MatAutocompleteModule,
+  MatCardModule
 ]
 
 @NgModule({

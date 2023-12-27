@@ -8,12 +8,26 @@ import { MaterialModule } from './shared/material/material.module';
 import { PostFormComponent } from './shared/components/post-form/post-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SearchFormComponent } from './shared/components/search-form/search-form.component';
+import { OwlCarasoulComponent } from './shared/components/owl-carasoul/owl-carasoul.component';
+import { HttpClientModule } from '@angular/common/http';
+import { FbDashComponent } from './shared/components/fb-dash/fb-dash.component';
+import { FbCardComponent } from './shared/components/fb-card/fb-card.component';
+// import { OwlCarousel } from 'ngx-owl-carousel';
+// import { CarouselModule } from 'ngx-owl-carousel-o';
+// import { OwlModule } from 'ngx-owl-carousel';
+// import{CarouselModule} from 'ngx-owl-carousel-o';
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
     PostFormComponent,
-    SearchFormComponent
+    SearchFormComponent,
+    OwlCarasoulComponent,
+    FbDashComponent,
+    FbCardComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -21,7 +35,8 @@ import { SearchFormComponent } from './shared/components/search-form/search-form
     BrowserAnimationsModule,
     MaterialModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent],
